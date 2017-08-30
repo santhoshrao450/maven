@@ -1,0 +1,83 @@
+  <?xml version="1.0" encoding="UTF-8" ?> 
+- <settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 http://maven.apache.org/xsd/settings-1.0.0.xsd">
+- <!--  offline
+   | Determines whether maven should attempt to connect to the network when executing a build.
+   | This will have an effect on artifact downloads, artifact deployment, and others.
+   |
+   | Default: false
+  --> 
+  <offline>false</offline> 
+  <pluginGroups /> 
+  <proxies /> 
+- <servers>
+- <server>
+  <id>releases</id> 
+  <username>admin</username> 
+  <password>admin123</password> 
+  </server>
+- <server>
+  <id>snapshots</id> 
+  <username>admin</username> 
+  <password>admin123</password> 
+  </server>
+  </servers>
+- <mirrors>
+- <mirror>
+  <id>nexus</id> 
+  <mirrorOf>*</mirrorOf> 
+  <name>central</name> 
+  <url>http://nexus.cmgmi.local/repository/archmiapp-public/</url> 
+  </mirror>
+  </mirrors>
+- <profiles>
+- <profile>
+  <id>nexus</id> 
+- <!-- Enable snapshots for the built in central repo to direct 
+  --> 
+- <!-- all requests to nexus via the mirror 
+  --> 
+- <repositories>
+- <repository>
+  <id>central</id> 
+  <url>http://central</url> 
+- <releases>
+  <enabled>true</enabled> 
+  </releases>
+- <snapshots>
+  <enabled>true</enabled> 
+  </snapshots>
+  </repository>
+  </repositories>
+- <pluginRepositories>
+- <pluginRepository>
+  <id>central</id> 
+  <url>http://central</url> 
+- <releases>
+  <enabled>true</enabled> 
+  </releases>
+- <snapshots>
+  <enabled>true</enabled> 
+  </snapshots>
+  </pluginRepository>
+  </pluginRepositories>
+  </profile>
+- <profile>
+  <id>sonar</id> 
+- <activation>
+  <activeByDefault>true</activeByDefault> 
+  </activation>
+- <properties>
+  <sonar.host.url>http://localhost:9000</sonar.host.url> 
+  <sonar.jdbc.username>APP_SONARQUBE</sonar.jdbc.username> 
+  <sonar.jdbc.password>hdj#29Hje</sonar.jdbc.password> 
+  <sonar.jdbc.schema>APP_SONARQUBE</sonar.jdbc.schema> 
+  <sonar.jdbc.url>jdbc:oracle:thin:@(DESCRIPTION=(LOAD_BALANCE=on) (FAILOVER = on ) (ADDRESS = (PROTOCOL = TCP)(HOST = insdbbld1-vip.ugcorp.com)(PORT = 1521)) (ADDRESS = (PROTOCOL = TCP)(HOST = insdbbld2-vip.ugcorp.com)(PORT = 1521)) (CONNECT_DATA=(SERVICE_NAME=SONARQUBE)))</sonar.jdbc.url> 
+  </properties>
+  </profile>
+  </profiles>
+- <activeProfiles>
+- <!-- make the profile active all the time 
+  --> 
+  <activeProfile>nexus</activeProfile> 
+  </activeProfiles>
+  </settings>
